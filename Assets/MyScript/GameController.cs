@@ -69,6 +69,9 @@ public class GameController : MonoBehaviour
         UIManager.countdownSlider.gameObject.SetActive(true);
         ObjectManager.cube.SetActive(true);
 
+        UIManager.playerHpText.text = "HP : " + GameData.playerHP;
+        UIManager.scoreText.text = "Score : " + GameData.score;
+
         //以防时间条闪一下
         UIManager.countdownSlider.value = GameData.countdownTime;
     }
