@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// 储存游戏里的一些数据
 /// </summary>
 public struct GameData 
 {
-    public static int score;            //分数
-    public static int playerHP;         //玩家血量
-    public static int currentOrder;     //当前旋转次数
+    public static int score;                                    //分数
+    public static int playerHP;                                 //玩家血量
+    public static int currentOrder;                             //当前旋转次数
+    public static float countdownTime;                          //倒计时的时间
 
-    public static GameState gameState = GameState.Ready;//当前游戏的状态
+    public static GameState gameState = GameState.Idle;         //当前游戏的状态
 }

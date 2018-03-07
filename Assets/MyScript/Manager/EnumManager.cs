@@ -8,7 +8,8 @@ using System.Collections;
 /// </summary>
 public enum GameState 
 { 
-    Ready,
+    Idle,
+    Start,
     Playing,
     End
 }

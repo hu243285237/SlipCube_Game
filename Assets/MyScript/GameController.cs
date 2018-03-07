@@ -39,22 +39,42 @@ public class GameController : MonoBehaviour
 	{
         switch(GameData.gameState)
         {
-            case GameState.Ready: Ready(); break;
-            case GameState.Playing: Playing(); break;
-            case GameState.End: End(); break;
+            case GameState.Start: StartGame(); break;
+            case GameState.Playing: PlayingGame(); break;
+            case GameState.End: EndGame(); break;
         }
 	}
 
     //---------------------------------------------------------------------------------------------------
 
-    private void Ready() 
+    /// <summary>
+    /// 当开始游戏时
+    /// </summary>
+    private void StartGame() 
     {
+        //初始化游戏数据
+        GameData.score = 0;
+        GameData.playerHP = 3;
+        GameData.currentOrder = 0;
+        GameData.countdownTime = 5.0f;
         GameData.gameState = GameState.Playing;
+
+        rotateDirectionList.Clear();
+
+        UIManager.startButton.SetActive(false);
+        UIManager.againButton.SetActive(false);
+        UIManager.quitButton.SetActive(false);
+        UIManager.playerHpText.gameObject.SetActive(true);
+        UIManager.scoreText.gameObject.SetActive(true);
+        ObjectManager.cube.SetActive(true);
     }
 
     //---------------------------------------------------------------------------------------------------
 
-    private void Playing() 
+    /// <summary>
+    /// 正在游戏时
+    /// </summary>
+    private void PlayingGame() 
     {
         if (GameData.playerHP > 0)
         {
@@ -72,21 +92,29 @@ public class GameController : MonoBehaviour
             }
         }
 
-        UIManager.playerHpText.text = "HP : " + GameData.playerHP;
-        UIManager.scoreText.text = "Score : " + GameData.score;
-    }
-
-    //---------------------------------------------------------------------------------------------------
-
-    private void End() 
-    { 
-    
+        GameData.countdownTime -= Time.deltaTime;
+        UIManager.countdownSlider.value = GameData.countdownTime;
+        JudgeTimeGameOver();
     }
 
     //---------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// 判断手势
+    /// 结束游戏时
+    /// </summary>
+    private void EndGame() 
+    {
+        GameData.gameState = GameState.Idle;
+
+        UIManager.againButton.SetActive(true);
+        UIManager.quitButton.SetActive(true);
+        ObjectManager.cube.SetActive(false);
+    }
+
+    //---------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 判断滑动手势
     /// </summary>
     private void JudgeGesture() 
     { 
@@ -169,7 +197,11 @@ public class GameController : MonoBehaviour
     {
         JudgeColor();
         RandomColor();
-        rotateState = RotateState.Update;//旋转的状态变为Update
+
+        //旋转的状态变为Update
+        rotateState = RotateState.Update;
+
+        GameData.countdownTime = 5.0f;
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -215,7 +247,10 @@ public class GameController : MonoBehaviour
     {
         GameData.currentOrder++;//滑动次数+1
         rotateState = RotateState.Start;
-        JudgeGameOver();//判断游戏是否结束
+        JudgeHpGameOver();//判断游戏是否结束
+
+        UIManager.playerHpText.text = "HP : " + GameData.playerHP;
+        UIManager.scoreText.text = "Score : " + GameData.score;
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -415,23 +450,28 @@ public class GameController : MonoBehaviour
     //---------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// 判断玩家是否游戏失败
+    /// 判断玩家是否游戏失败，Hp
     /// </summary>
-    private void JudgeGameOver() 
+    private void JudgeHpGameOver() 
     { 
         if(GameData.playerHP <= 0)
         {
-            UIManager.againButton.SetActive(true);
-            UIManager.quitButton.SetActive(true);
-
-            ObjectManager.cube.SetActive(false);
-
             //当前游戏状态变为End
             GameData.gameState = GameState.End;
+        }
+    }
 
-            //重置旋转次数数据
-            rotateDirectionList.Clear();
-            GameData.currentOrder = 0;
+    //---------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 判断玩家是否游戏失败，Time
+    /// </summary>
+    private void JudgeTimeGameOver()
+    {
+        if (GameData.countdownTime <= 0)
+        {
+            //当前游戏状态变为End
+            GameData.gameState = GameState.End;
         }
     }
 
