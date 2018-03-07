@@ -66,7 +66,11 @@ public class GameController : MonoBehaviour
         UIManager.quitButton.SetActive(false);
         UIManager.playerHpText.gameObject.SetActive(true);
         UIManager.scoreText.gameObject.SetActive(true);
+        UIManager.countdownSlider.gameObject.SetActive(true);
         ObjectManager.cube.SetActive(true);
+
+        //以防时间条闪一下
+        UIManager.countdownSlider.value = GameData.countdownTime;
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -108,6 +112,9 @@ public class GameController : MonoBehaviour
 
         UIManager.againButton.SetActive(true);
         UIManager.quitButton.SetActive(true);
+        UIManager.playerHpText.gameObject.SetActive(false);
+        UIManager.scoreText.gameObject.SetActive(false);
+        UIManager.countdownSlider.gameObject.SetActive(false);
         ObjectManager.cube.SetActive(false);
     }
 
@@ -118,6 +125,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void JudgeGesture() 
     { 
+        //用来在PC端测试
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
             rotateDirectionList.Add(RotateDirection.Up);
