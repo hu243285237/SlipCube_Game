@@ -10,8 +10,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: MyCompany
-  productName: RotateCube1.0
+  companyName: HuCompany
+  productName: SlipCube1.0
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -141,7 +141,7 @@ PlayerSettings:
   targetPixelDensity: 30
   resolutionScalingMode: 0
   applicationIdentifier:
-    Android: com.MyCompany.AndroidGame
+    Android: com.HuCompany.SlipCube
     Standalone: unity.MyCompany.RotateCube1.0
     Tizen: com.MyCompany.AndroidGame
     iOS: com.MyCompany.AndroidGame
