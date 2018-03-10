@@ -11,6 +11,7 @@ public struct GameData
     public static int playerHP;                                 //玩家血量
     public static int currentOrder;                             //当前旋转次数
     public static float countdownTime;                          //倒计时的时间
+    public static float countdownSpeed;                         //倒计时的速度
 
     public static GameState gameState = GameState.Idle;         //当前游戏的状态
 }

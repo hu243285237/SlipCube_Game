@@ -57,6 +57,7 @@ public class GameController : MonoBehaviour
         GameData.playerHP = 3;
         GameData.currentOrder = 0;
         GameData.countdownTime = 5.0f;
+        GameData.countdownSpeed = 1.0f;
         GameData.gameState = GameState.Playing;
 
         rotateDirectionList.Clear();
@@ -99,7 +100,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        GameData.countdownTime -= Time.deltaTime;
+        GameData.countdownTime -= GameData.countdownSpeed * Time.deltaTime;
         UIManager.countdownSlider.value = GameData.countdownTime;
         JudgeTimeGameOver();
     }
@@ -258,6 +259,7 @@ public class GameController : MonoBehaviour
     {
         GameData.currentOrder++;//滑动次数+1
         rotateState = RotateState.Start;
+        RaiseCountdownSpeed();//增加倒计时的速度
         JudgeHpGameOver();//判断游戏是否结束
 
         UIManager.playerHpText.text = "HP : " + GameData.playerHP;
@@ -456,6 +458,19 @@ public class GameController : MonoBehaviour
         }
 
         nextPlaneEdgeList.Clear();
+    }
+
+    //---------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 逐渐增加倒计时的速度
+    /// </summary>
+    private void RaiseCountdownSpeed()
+    {
+        if (GameData.currentOrder % 10 == 0)
+        {
+            GameData.countdownSpeed++;
+        }
     }
 
     //---------------------------------------------------------------------------------------------------
