@@ -161,7 +161,7 @@ public class GameController : MonoBehaviour
                 endTouchPosition = Input.GetTouch(0).position;
 
                 //当滑动的距离大于200像素时
-                if (Vector2.Distance(beginTouchPosition, endTouchPosition) > 200)
+                if (Vector2.Distance(beginTouchPosition, endTouchPosition) > 150)
                 {
                     //如果x方向滑动的距离大于y滑动的距离
                     if (Mathf.Abs(endTouchPosition.x - beginTouchPosition.x) > Mathf.Abs(endTouchPosition.y - beginTouchPosition.y))
