@@ -295,17 +295,14 @@ public class GameController : MonoBehaviour
         switch(currentColor)
         {
             case Color.Green: 
-                debugText.text = "green";
                 GameData.score++;
                 break;
 
             case Color.Blue:
-                debugText.text = "blue";
                 GameData.score += 2;
                 break;
 
             case Color.Orange:
-                debugText.text = "orange";
                 if(GameData.playerHP < 3)
                 {
                     GameData.playerHP++;
@@ -313,18 +310,15 @@ public class GameController : MonoBehaviour
                 break;
 
             case Color.Purple: 
-                debugText.text = "purple";
                 GameData.score += 5;
                 // special affect
                 break;
 
             case Color.Yellow:
-                debugText.text = "yellow";
                 GameData.playerHP--;
                 break;
 
             case Color.Red: 
-                debugText.text = "red";
                 GameData.playerHP = 0;
                 break;
         }
