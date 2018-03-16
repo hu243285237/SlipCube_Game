@@ -26,13 +26,6 @@ public class GameController : MonoBehaviour
 
     //---------------------------------------------------------------------------------------------------
 
-    void Awake()
-    {
-        Application.targetFrameRate = 60;
-    }
-
-    //---------------------------------------------------------------------------------------------------
-
     void Start() 
     {
         RandomColor();
@@ -167,7 +160,7 @@ public class GameController : MonoBehaviour
                 //记录结束触碰时的位置
                 endTouchPosition = Input.GetTouch(0).position;
 
-                //当滑动的距离大于200像素时
+                //当滑动的距离大于150像素时
                 if (Vector2.Distance(beginTouchPosition, endTouchPosition) > 150)
                 {
                     //如果x方向滑动的距离大于y滑动的距离
