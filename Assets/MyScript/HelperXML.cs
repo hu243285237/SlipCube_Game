@@ -28,15 +28,20 @@ public class HelperXML : MonoBehaviour
         //遍历所有的item
         foreach (XmlElement item in nodeList) 
         {
+            Rank rank = new Rank();
+
             //遍历所有item里的元素
             foreach(XmlElement attribute in item)
             {
                 switch(attribute.Name)
                 {
-                    case "Rank": Debug.Log("Rank : " + attribute.InnerText); break;
-                    case "Score": Debug.Log("Score : " + attribute.InnerText); break;
+                    case "Rank": rank.rank = int.Parse(attribute.InnerText); break;
+                    case "Score": rank.score = int.Parse(attribute.InnerText); break;
+                    case "Name": rank.name = attribute.InnerText; break;
                 }
             }
+
+            GameData.rankList.Add(rank);
         }
     }
 

@@ -30,7 +30,12 @@ public class GameController : MonoBehaviour
     {
         RandomColor();
 
-        //HelperXML.LoadXmlData();
+        HelperXML.LoadXmlData();
+
+        foreach (Rank rank in GameData.rankList)
+        {
+            Debug.Log("排名：" + rank.rank + " 分数：" + rank.score + " 名字：" + rank.name);
+        }
     }
 
     //---------------------------------------------------------------------------------------------------
