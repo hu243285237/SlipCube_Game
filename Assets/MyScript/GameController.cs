@@ -32,10 +32,14 @@ public class GameController : MonoBehaviour
 
         HelperXML.LoadXmlData();
 
+        string rankString = "";
+
         foreach (Rank rank in GameData.rankList)
         {
-            Debug.Log("排名：" + rank.rank + " 分数：" + rank.score + " 名字：" + rank.name);
+            rankString += "排名：" + rank.rank + " 分数：" + rank.score + " 名字：" + rank.name + "\n";
         }
+
+        debugText.text = rankString;
     }
 
     //---------------------------------------------------------------------------------------------------
