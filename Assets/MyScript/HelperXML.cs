@@ -10,12 +10,32 @@ using System.IO;
 public class HelperXML : MonoBehaviour
 {
     //xml文件的路径
-    public static string filePath = Application.streamingAssetsPath + "/RankingBoard.xml";
+    private static string filePath = Application.persistentDataPath + "/RankingBoard.xml";
 
     //----------------------------------------------------------------------------------
 
     /// <summary>
-    /// 读取所有xml的数据
+    /// 将文件存到persistent
+    /// </summary>
+    public static void SetFileToPersistent()
+    {
+        FileInfo info = new FileInfo(filePath);
+
+        if (!info.Exists)
+        {
+            TextAsset textAsset = Resources.Load("RankingBoard") as TextAsset;
+            string content = textAsset.text;
+            StreamWriter streamWriter = info.CreateText();
+            streamWriter.Write(content);
+            streamWriter.Close();
+            streamWriter.Dispose();
+        }
+    }
+
+    //----------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 读取xml数据
     /// </summary>
     public static void LoadXmlData() 
     {
@@ -36,8 +56,8 @@ public class HelperXML : MonoBehaviour
                 switch(attribute.Name)
                 {
                     case "Rank": rank.rank = int.Parse(attribute.InnerText); break;
-                    case "Score": rank.score = int.Parse(attribute.InnerText); break;
                     case "Name": rank.name = attribute.InnerText; break;
+                    case "Score": rank.score = int.Parse(attribute.InnerText); break;
                 }
             }
 
@@ -47,5 +67,61 @@ public class HelperXML : MonoBehaviour
 
     //----------------------------------------------------------------------------------
 
-    
+    /// <summary>
+    /// 更新xml文件
+    /// </summary>
+    public static void UpdateXmlFile()
+    {
+        DeleteXmlFile();
+        CreatXmlFile();
+    }
+
+    //----------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 删除xml文件
+    /// </summary>
+    public static void DeleteXmlFile()
+    {
+        File.Delete(filePath);
+    }
+
+    //----------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 新建xml文件
+    /// </summary>
+    public static void CreatXmlFile()
+    {
+        if (!File.Exists(filePath))
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+
+            XmlElement group = xmlDoc.CreateElement("Group");
+
+            //遍历所有的排名信息，存进xml
+            foreach (Rank r in GameData.rankList)
+            {
+                XmlElement item = xmlDoc.CreateElement("Item");
+
+                XmlElement rank = xmlDoc.CreateElement("Rank");
+                XmlElement name = xmlDoc.CreateElement("Name");
+                XmlElement score = xmlDoc.CreateElement("Score");
+
+                rank.InnerText = r.rank.ToString();
+                name.InnerText = r.name;
+                score.InnerText = r.score.ToString();
+
+                rank.AppendChild(item);
+                name.AppendChild(item);
+                score.AppendChild(item);
+
+                item.AppendChild(group);
+            }
+
+            xmlDoc.Save(filePath);
+        }
+    }
+
+    //----------------------------------------------------------------------------------
 }

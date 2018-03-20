@@ -30,16 +30,15 @@ public class GameController : MonoBehaviour
     {
         RandomColor();
 
+        HelperXML.SetFileToPersistent();
         HelperXML.LoadXmlData();
-
+        /*
         string rankString = "";
-
         foreach (Rank rank in GameData.rankList)
         {
             rankString += "排名：" + rank.rank + " 分数：" + rank.score + " 名字：" + rank.name + "\n";
         }
-
-        debugText.text = rankString;
+        UIManager.rankText.text = rankString;*/
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -74,6 +73,7 @@ public class GameController : MonoBehaviour
         UIManager.startButton.SetActive(false);
         UIManager.againButton.SetActive(false);
         UIManager.quitButton.SetActive(false);
+        UIManager.rankButton.SetActive(false);
         UIManager.playerHpText.gameObject.SetActive(true);
         UIManager.scoreText.gameObject.SetActive(true);
         UIManager.countdownSlider.gameObject.SetActive(true);
@@ -125,10 +125,14 @@ public class GameController : MonoBehaviour
 
         UIManager.againButton.SetActive(true);
         UIManager.quitButton.SetActive(true);
-        UIManager.playerHpText.gameObject.SetActive(false);
+        UIManager.rankButton.SetActive(true);
         UIManager.scoreText.gameObject.SetActive(false);
+        UIManager.playerHpText.gameObject.SetActive(false);
         UIManager.countdownSlider.gameObject.SetActive(false);
         ObjectManager.cube.SetActive(false);
+
+        Rank rank = new Rank(1, "new", GameData.score);
+        GameData.rankList.Add(rank);
     }
 
     //---------------------------------------------------------------------------------------------------

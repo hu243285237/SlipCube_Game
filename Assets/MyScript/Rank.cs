@@ -8,8 +8,8 @@ using UnityEngine;
 public class Rank
 {
     public int rank;            //排名
-    public int score;           //分数
     public string name;         //名字
+    public int score;           //分数
 
     //-----------------------------------------------------------------
     
@@ -20,11 +20,11 @@ public class Rank
 
     //-----------------------------------------------------------------
 
-    public Rank(int rank,int score,string name)
+    public Rank(int rank, string name, int score)
     {
         this.rank = rank;
-        this.score = score;
         this.name = name;
+        this.score = score;
     }
     
     //-----------------------------------------------------------------
