@@ -112,11 +112,13 @@ public class HelperXML : MonoBehaviour
                 name.InnerText = r.name;
                 score.InnerText = r.score.ToString();
 
-                rank.AppendChild(item);
-                name.AppendChild(item);
-                score.AppendChild(item);
-
-                item.AppendChild(group);
+                item.AppendChild(rank);
+                item.AppendChild(name);
+                item.AppendChild(score);
+                
+                group.AppendChild(item);
+                
+                xmlDoc.AppendChild(group);
             }
 
             xmlDoc.Save(filePath);
