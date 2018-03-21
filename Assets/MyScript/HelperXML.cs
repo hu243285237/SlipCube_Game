@@ -115,8 +115,10 @@ public class HelperXML : MonoBehaviour
                 item.AppendChild(rank);
                 item.AppendChild(name);
                 item.AppendChild(score);
-
+                
                 group.AppendChild(item);
+                
+                xmlDoc.AppendChild(group);
             }
 
             xmlDoc.Save(filePath);
