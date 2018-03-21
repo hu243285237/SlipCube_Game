@@ -30,14 +30,10 @@ public class GameController : MonoBehaviour
     {
         RandomColor();
 
-        HelperXML.SetFileToPersistent();
-        /*
-        string rankString = "";
-        foreach (Rank rank in GameData.rankList)
-        {
-            rankString += "排名：" + rank.rank + " 分数：" + rank.score + " 名字：" + rank.name + "\n";
-        }
-        UIManager.rankText.text = rankString;*/
+        //当运行程序时，将已存在的xml文件存到persistent目录下
+        //HelperXML.SetFileToPersistent();
+
+        HelperXML.LoadXmlData();
     }
 
     //---------------------------------------------------------------------------------------------------

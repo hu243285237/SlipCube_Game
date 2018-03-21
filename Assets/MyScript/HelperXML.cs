@@ -15,7 +15,7 @@ public class HelperXML : MonoBehaviour
     //----------------------------------------------------------------------------------
 
     /// <summary>
-    /// 将文件存到persistent
+    /// 将xml文件存到persistent路径下
     /// </summary>
     public static void SetFileToPersistent()
     {
@@ -39,6 +39,9 @@ public class HelperXML : MonoBehaviour
     /// </summary>
     public static void LoadXmlData() 
     {
+        //先清空排名信息
+        GameData.rankList.Clear();
+
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(filePath);
 
@@ -121,6 +124,7 @@ public class HelperXML : MonoBehaviour
                 xmlDoc.AppendChild(group);
             }
 
+            //将xml文件保存到persistent里
             xmlDoc.Save(filePath);
         }
     }
