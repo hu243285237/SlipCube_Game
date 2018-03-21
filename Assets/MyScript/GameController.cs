@@ -31,7 +31,6 @@ public class GameController : MonoBehaviour
         RandomColor();
 
         HelperXML.SetFileToPersistent();
-        HelperXML.LoadXmlData();
         /*
         string rankString = "";
         foreach (Rank rank in GameData.rankList)
@@ -133,6 +132,8 @@ public class GameController : MonoBehaviour
 
         Rank rank = new Rank(1, "new", GameData.score);
         GameData.rankList.Add(rank);
+
+        HelperXML.UpdateXmlFile();
     }
 
     //---------------------------------------------------------------------------------------------------

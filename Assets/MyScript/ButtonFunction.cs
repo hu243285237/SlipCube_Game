@@ -25,8 +25,6 @@ public class ButtonFunction : MonoBehaviour
         //显示排名信息
         UIManager.rankText.gameObject.SetActive(true);
 
-        HelperXML.UpdateXmlFile();
-
         HelperXML.LoadXmlData();
 
         string rankString = "";
