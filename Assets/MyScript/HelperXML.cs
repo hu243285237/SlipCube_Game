@@ -10,7 +10,7 @@ using System.IO;
 public class HelperXML : MonoBehaviour
 {
     //xml文件的路径
-    public static string filePath = Application.dataPath + "/RankingBoard.xml";
+    public static string filePath = Application.persistentDataPath + "/RankingBoard.xml";
 
     //----------------------------------------------------------------------------------
 
