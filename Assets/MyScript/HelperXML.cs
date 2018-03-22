@@ -40,7 +40,7 @@ public class HelperXML : MonoBehaviour
     public static void LoadXmlData() 
     {
         //如果当前没有任何排名信息，则新建一个xml文件
-        if(!File.Exists)
+        if(!File.Exists(filePath))
         {
             CreatXmlFile();
             
