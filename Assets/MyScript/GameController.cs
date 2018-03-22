@@ -65,21 +65,9 @@ public class GameController : MonoBehaviour
 
         rotateDirectionList.Clear();
 
-        UIManager.startButton.SetActive(false);
-        UIManager.againButton.SetActive(false);
-        UIManager.quitButton.SetActive(false);
-        UIManager.rankButton.SetActive(false);
-        UIManager.rankText.gameObject.SetActive(false);
-        UIManager.playerHpText.gameObject.SetActive(true);
-        UIManager.scoreText.gameObject.SetActive(true);
-        UIManager.countdownSlider.gameObject.SetActive(true);
+        CanvasController.StartGameUI();
+
         ObjectManager.cube.SetActive(true);
-
-        UIManager.playerHpText.text = "HP : " + GameData.playerHP;
-        UIManager.scoreText.text = "Score : " + GameData.score;
-
-        //以防时间条闪一下
-        UIManager.countdownSlider.value = GameData.countdownTime;
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -119,19 +107,9 @@ public class GameController : MonoBehaviour
     {
         GameData.gameState = GameState.Idle;
 
-        UIManager.againButton.SetActive(true);
-        UIManager.quitButton.SetActive(true);
-        UIManager.rankButton.SetActive(true);
-        UIManager.rankText.gameObject.SetActive(false);
-        UIManager.scoreText.gameObject.SetActive(false);
-        UIManager.playerHpText.gameObject.SetActive(false);
-        UIManager.countdownSlider.gameObject.SetActive(false);
+        CanvasController.EndGameUI();
+
         ObjectManager.cube.SetActive(false);
-
-        Rank rank = new Rank("new", GameData.score);
-        GameData.rankList.Add(rank);
-
-        HelperXML.UpdateXmlFile();
     }
 
     //---------------------------------------------------------------------------------------------------

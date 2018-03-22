@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     public Text _scoreText;
     public Slider _countdownSlider;
     public Text _rankText;
+    public GameObject _confirmButton;
+    public InputField _nameInputField;
 
     public static GameObject startButton;
     public static GameObject againButton;
@@ -21,6 +23,8 @@ public class UIManager : MonoBehaviour
     public static Text scoreText;
     public static Slider countdownSlider;
     public static Text rankText;
+    public static GameObject confirmButton;
+    public static InputField nameInputField;
 
     //-----------------------------------------------
 
@@ -34,6 +38,8 @@ public class UIManager : MonoBehaviour
         scoreText = _scoreText;
         countdownSlider = _countdownSlider;
         rankText = _rankText;
+        confirmButton = _confirmButton;
+        nameInputField = _nameInputField;
     }
 
     //-----------------------------------------------

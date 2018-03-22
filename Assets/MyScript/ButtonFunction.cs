@@ -58,4 +58,19 @@ public class ButtonFunction : MonoBehaviour
     }
 
     //------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 确认名字按钮
+    /// </summary>
+    public void _ConfirmNameButton()
+    {
+        string name = UIManager.nameInputField.text;
+        Rank rank = new Rank(name, GameData.score);
+        GameData.rankList.Add(rank);
+        HelperXML.UpdateXmlFile();
+
+        CanvasController.MainUI();
+    }
+
+    //------------------------------------------------------------------------------------------
 }
