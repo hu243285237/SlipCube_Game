@@ -94,7 +94,12 @@ public class HelperXML : MonoBehaviour
     /// </summary>
     public static void DeleteXmlFile()
     {
-        File.Delete(filePath);
+        //如果存在xml文件
+        if(File.Exists(filePath))
+        {
+            //删除文件
+            File.Delete(filePath);
+        }
     }
 
     //----------------------------------------------------------------------------------
