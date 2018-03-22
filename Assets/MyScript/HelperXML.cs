@@ -39,6 +39,14 @@ public class HelperXML : MonoBehaviour
     /// </summary>
     public static void LoadXmlData() 
     {
+        //如果当前没有任何排名信息，则新建一个xml文件
+        if(!File.Exists)
+        {
+            CreatXmlFile();
+            
+            return;
+        }
+    
         //先清空排名信息
         GameData.rankList.Clear();
 
