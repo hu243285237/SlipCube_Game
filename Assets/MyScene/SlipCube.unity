@@ -5005,7 +5005,7 @@ GameObject:
   - component: {fileID: 1751256563}
   - component: {fileID: 1751256564}
   m_Layer: 0
-  m_Name: AndroidSetting
+  m_Name: GameSetting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -14,27 +14,7 @@ public class ButtonFunction : MonoBehaviour
         //游戏状态变为开始游戏
         GameData.gameState = GameState.Start;
     }
-
-    //------------------------------------------------------------------------------------------
-
-    /// <summary>
-    /// 排名按钮
-    /// </summary>
-    public void _RankButton()
-    {
-        //显示排名信息
-        UIManager.rankText.gameObject.SetActive(true);
-
-        HelperXML.LoadXmlData();
-
-        string rankString = "";
-        foreach (Rank rank in GameData.rankList)
-        {
-            rankString += "排名：" + rank.rank + " 分数：" + rank.score + " 名字：" + rank.name + "\n";
-        }
-        UIManager.rankText.text = rankString;
-    }
-
+    
     //------------------------------------------------------------------------------------------
 
     /// <summary>
@@ -55,6 +35,26 @@ public class ButtonFunction : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("QuitButton");
+    }
+
+    //------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 排名按钮
+    /// </summary>
+    public void _RankButton()
+    {
+        //显示排名信息
+        UIManager.rankText.gameObject.SetActive(true);
+
+        HelperXML.LoadXmlData();
+
+        string rankString = "";
+        foreach (Rank rank in GameData.rankList)
+        {
+            rankString += "排名：" + (GameData.rankList.IndexOf(rank) + 1) + " 分数：" + rank.score + " 名字：" + rank.name + "\n";
+        }
+        UIManager.rankText.text = rankString;
     }
 
     //------------------------------------------------------------------------------------------

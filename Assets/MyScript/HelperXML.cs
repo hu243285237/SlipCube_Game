@@ -10,7 +10,7 @@ using System.IO;
 public class HelperXML : MonoBehaviour
 {
     //xml文件的路径
-    private static string filePath = Application.persistentDataPath + "/RankingBoard.xml";
+    public static string filePath = Application.dataPath + "/RankingBoard.xml";
 
     //----------------------------------------------------------------------------------
 
@@ -66,7 +66,6 @@ public class HelperXML : MonoBehaviour
             {
                 switch(attribute.Name)
                 {
-                    case "Rank": rank.rank = int.Parse(attribute.InnerText); break;
                     case "Name": rank.name = attribute.InnerText; break;
                     case "Score": rank.score = int.Parse(attribute.InnerText); break;
                 }
@@ -84,6 +83,7 @@ public class HelperXML : MonoBehaviour
     public static void UpdateXmlFile()
     {
         DeleteXmlFile();
+        SortRankList();
         CreatXmlFile();
     }
 
@@ -119,16 +119,13 @@ public class HelperXML : MonoBehaviour
             foreach (Rank r in GameData.rankList)
             {
                 XmlElement item = xmlDoc.CreateElement("Item");
-
-                XmlElement rank = xmlDoc.CreateElement("Rank");
+                
                 XmlElement name = xmlDoc.CreateElement("Name");
                 XmlElement score = xmlDoc.CreateElement("Score");
-
-                rank.InnerText = r.rank.ToString();
+                
                 name.InnerText = r.name;
                 score.InnerText = r.score.ToString();
-
-                item.AppendChild(rank);
+                
                 item.AppendChild(name);
                 item.AppendChild(score);
                 
@@ -140,6 +137,16 @@ public class HelperXML : MonoBehaviour
             //将xml文件保存到persistent里
             xmlDoc.Save(filePath);
         }
+    }
+
+    //----------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 按分数从高到低排名
+    /// </summary>
+    private static void SortRankList()
+    {
+        GameData.rankList.Sort((x, y) => y.score.CompareTo(x.score));
     }
 
     //----------------------------------------------------------------------------------

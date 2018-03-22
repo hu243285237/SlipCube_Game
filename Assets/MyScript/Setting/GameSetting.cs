@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 开始游戏前的一些设置
 /// </summary>
-public class AndroidSetting : MonoBehaviour
+public class GameSetting : MonoBehaviour
 {
     void Awake()
     {

@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
         //当运行程序时，将已存在的xml文件存到persistent目录下
         //HelperXML.SetFileToPersistent();
 
-        HelperXML.LoadXmlData();
+        //HelperXML.LoadXmlData();
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -69,6 +69,7 @@ public class GameController : MonoBehaviour
         UIManager.againButton.SetActive(false);
         UIManager.quitButton.SetActive(false);
         UIManager.rankButton.SetActive(false);
+        UIManager.rankText.gameObject.SetActive(false);
         UIManager.playerHpText.gameObject.SetActive(true);
         UIManager.scoreText.gameObject.SetActive(true);
         UIManager.countdownSlider.gameObject.SetActive(true);
@@ -121,12 +122,13 @@ public class GameController : MonoBehaviour
         UIManager.againButton.SetActive(true);
         UIManager.quitButton.SetActive(true);
         UIManager.rankButton.SetActive(true);
+        UIManager.rankText.gameObject.SetActive(false);
         UIManager.scoreText.gameObject.SetActive(false);
         UIManager.playerHpText.gameObject.SetActive(false);
         UIManager.countdownSlider.gameObject.SetActive(false);
         ObjectManager.cube.SetActive(false);
 
-        Rank rank = new Rank(1, "new", GameData.score);
+        Rank rank = new Rank("new", GameData.score);
         GameData.rankList.Add(rank);
 
         HelperXML.UpdateXmlFile();
