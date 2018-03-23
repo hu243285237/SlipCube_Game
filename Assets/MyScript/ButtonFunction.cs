@@ -38,8 +38,8 @@ public class ButtonFunction : MonoBehaviour
     /// </summary>
     public void _RankButton()
     {
-        //显示排名信息
-        CanvasManager.rankText.gameObject.SetActive(true);
+        CanvasManager.mainCanvas.SetActive(false);
+        CanvasManager.rankCanvas.SetActive(true);
 
         HelperXML.LoadXmlData();
 
@@ -57,6 +57,20 @@ public class ButtonFunction : MonoBehaviour
     public void _QuitButton()
     {
         Application.Quit();
+    }
+
+    //-------------------------------------返回按钮-------------------------------------------
+
+    /// <summary>
+    /// 返回按钮
+    /// </summary>
+    public void _ReturnButton()
+    {
+        CanvasManager.mainCanvas.SetActive(true);
+
+        CanvasManager.helpCanvas.SetActive(false);
+        CanvasManager.propsCanvas.SetActive(false);
+        CanvasManager.rankCanvas.SetActive(false);
     }
 
     //---------------------------------游戏结束界面按钮---------------------------------------
