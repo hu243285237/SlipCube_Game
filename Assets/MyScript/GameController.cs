@@ -33,7 +33,8 @@ public class GameController : MonoBehaviour
         //当运行程序时，将已存在的xml文件存到persistent目录下
         //HelperXML.SetFileToPersistent();
 
-        //HelperXML.LoadXmlData();
+	//开始游戏时加载排名信息进rankList
+        HelperXML.LoadXmlData();
     }
 
     //---------------------------------------------------------------------------------------------------
