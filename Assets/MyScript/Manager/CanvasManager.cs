@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class CanvasManager : MonoBehaviour
 {
     //-----------------------------------界面UI整合------------------------------
 

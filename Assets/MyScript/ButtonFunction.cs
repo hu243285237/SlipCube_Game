@@ -4,7 +4,7 @@ using System.Collections;
 public class ButtonFunction : MonoBehaviour
 {
 
-    //------------------------------------------------------------------------------------------
+    //------------------------------------主界面按钮-----------------------------------------
 
     /// <summary>
     /// 开始按钮
@@ -14,30 +14,24 @@ public class ButtonFunction : MonoBehaviour
         //游戏状态变为开始游戏
         GameData.gameState = GameState.Start;
     }
-    
-    //------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// 重新开始按钮
+    /// 帮助按钮
     /// </summary>
-    public void _AgainButton()
+    public void _HelpButton()
     {
-        //游戏状态变为开始游戏
-        GameData.gameState = GameState.Start;
+        CanvasManager.mainCanvas.SetActive(false);
+        CanvasManager.helpCanvas.SetActive(true);
     }
-
-    //------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// 退出游戏按钮
+    /// 道具按钮
     /// </summary>
-    public void _QuitButton()
+    public void _PropsButton()
     {
-        Application.Quit();
-        Debug.Log("QuitButton");
+        CanvasManager.mainCanvas.SetActive(false);
+        CanvasManager.propsCanvas.SetActive(true);
     }
-
-    //------------------------------------------------------------------------------------------
 
     /// <summary>
     /// 排名按钮
@@ -45,7 +39,7 @@ public class ButtonFunction : MonoBehaviour
     public void _RankButton()
     {
         //显示排名信息
-        UIManager.rankText.gameObject.SetActive(true);
+        CanvasManager.rankText.gameObject.SetActive(true);
 
         HelperXML.LoadXmlData();
 
@@ -54,23 +48,31 @@ public class ButtonFunction : MonoBehaviour
         {
             rankString += "排名：" + (GameData.rankList.IndexOf(rank) + 1) + " 分数：" + rank.score + " 名字：" + rank.name + "\n";
         }
-        UIManager.rankText.text = rankString;
+        CanvasManager.rankText.text = rankString;
     }
 
-    //------------------------------------------------------------------------------------------
+    /// <summary>
+    /// 退出游戏按钮
+    /// </summary>
+    public void _QuitButton()
+    {
+        Application.Quit();
+    }
+
+    //---------------------------------游戏结束界面按钮---------------------------------------
 
     /// <summary>
     /// 确认名字按钮
     /// </summary>
     public void _ConfirmNameButton()
     {
-        string name = UIManager.nameInputField.text;
+        string name = CanvasManager.nameInputField.text;
         Rank rank = new Rank(name, GameData.score);
         GameData.rankList.Add(rank);
         HelperXML.UpdateXmlFile();
 
-        UIManager.endGameCanvas.SetActive(false);
-        UIManager.mainCanvas.SetActive(true);
+        CanvasManager.endGameCanvas.SetActive(false);
+        CanvasManager.mainCanvas.SetActive(true);
     }
 
     //------------------------------------------------------------------------------------------

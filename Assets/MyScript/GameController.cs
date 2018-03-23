@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
         //当运行程序时，将已存在的xml文件存到persistent目录下
         //HelperXML.SetFileToPersistent();
 
-	//开始游戏时加载排名信息进rankList
+	    //开始游戏时加载排名信息进rankList
         HelperXML.LoadXmlData();
     }
 
@@ -66,14 +66,14 @@ public class GameController : MonoBehaviour
 
         rotateDirectionList.Clear();
 
-        UIManager.mainCanvas.SetActive(false);
-        UIManager.playingCanvas.SetActive(true);
+        CanvasManager.mainCanvas.SetActive(false);
+        CanvasManager.playingCanvas.SetActive(true);
 
-        UIManager.playerHpText.text = "HP : " + GameData.playerHP;
-        UIManager.scoreText.text = "Score : " + GameData.score;
+        CanvasManager.playerHpText.text = "HP : " + GameData.playerHP;
+        CanvasManager.scoreText.text = "Score : " + GameData.score;
 
         //以防时间条闪一下
-        UIManager.countdownSlider.value = GameData.countdownTime;
+        CanvasManager.countdownSlider.value = GameData.countdownTime;
 
         ObjectManager.cube.SetActive(true);
     }
@@ -102,7 +102,7 @@ public class GameController : MonoBehaviour
         }
 
         GameData.countdownTime -= GameData.countdownSpeed * Time.deltaTime;
-        UIManager.countdownSlider.value = GameData.countdownTime;
+        CanvasManager.countdownSlider.value = GameData.countdownTime;
         JudgeTimeGameOver();
     }
 
@@ -115,8 +115,8 @@ public class GameController : MonoBehaviour
     {
         GameData.gameState = GameState.Idle;
 
-        UIManager.playingCanvas.SetActive(false);
-        UIManager.endGameCanvas.SetActive(true);
+        CanvasManager.playingCanvas.SetActive(false);
+        CanvasManager.endGameCanvas.SetActive(true);
 
         ObjectManager.cube.SetActive(false);
     }
@@ -261,8 +261,8 @@ public class GameController : MonoBehaviour
         RaiseCountdownSpeed();//增加倒计时的速度
         JudgeHpGameOver();//判断游戏是否结束
 
-        UIManager.playerHpText.text = "HP : " + GameData.playerHP;
-        UIManager.scoreText.text = "Score : " + GameData.score;
+        CanvasManager.playerHpText.text = "HP : " + GameData.playerHP;
+        CanvasManager.scoreText.text = "Score : " + GameData.score;
     }
 
     //---------------------------------------------------------------------------------------------------
