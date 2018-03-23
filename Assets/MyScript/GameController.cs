@@ -66,7 +66,14 @@ public class GameController : MonoBehaviour
 
         rotateDirectionList.Clear();
 
-        CanvasController.StartGameUI();
+        UIManager.mainCanvas.SetActive(false);
+        UIManager.playingCanvas.SetActive(true);
+
+        UIManager.playerHpText.text = "HP : " + GameData.playerHP;
+        UIManager.scoreText.text = "Score : " + GameData.score;
+
+        //以防时间条闪一下
+        UIManager.countdownSlider.value = GameData.countdownTime;
 
         ObjectManager.cube.SetActive(true);
     }
@@ -108,7 +115,8 @@ public class GameController : MonoBehaviour
     {
         GameData.gameState = GameState.Idle;
 
-        CanvasController.EndGameUI();
+        UIManager.playingCanvas.SetActive(false);
+        UIManager.endGameCanvas.SetActive(true);
 
         ObjectManager.cube.SetActive(false);
     }

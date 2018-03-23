@@ -69,7 +69,8 @@ public class ButtonFunction : MonoBehaviour
         GameData.rankList.Add(rank);
         HelperXML.UpdateXmlFile();
 
-        CanvasController.MainUI();
+        UIManager.endGameCanvas.SetActive(false);
+        UIManager.mainCanvas.SetActive(true);
     }
 
     //------------------------------------------------------------------------------------------
