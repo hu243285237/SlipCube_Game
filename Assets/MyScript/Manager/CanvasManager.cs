@@ -37,13 +37,27 @@ public class CanvasManager : MonoBehaviour
 
     //------------------------------------帮助界面UI-------------------------------
 
+    public GameObject _helpText;
+    public GameObject _helpReturnButton;
+
+    public static GameObject helpText;
+    public static GameObject helpReturnButton;
+
     //------------------------------------道具界面UI-------------------------------
+
+    public Text _coinText;
+    public GameObject _propsReturnButton;
+
+    public static Text coinText;
+    public static GameObject propsReturnButton;
 
     //-----------------------------------排行榜界面UI------------------------------
 
     public Text _rankText;
+    public GameObject _rankReturnButton;
 
     public static Text rankText;
+    public static GameObject rankReturnButton;
 
     //-----------------------------------游戏中界面UI------------------------------
 
@@ -81,7 +95,14 @@ public class CanvasManager : MonoBehaviour
         rankButton = _rankButton;
         quitButton = _quitButton;
 
+        helpText = _helpText;
+        helpReturnButton = _helpReturnButton;
+
+        coinText = _coinText;
+        propsReturnButton = _propsReturnButton;
+
         rankText = _rankText;
+        rankReturnButton = _rankReturnButton;
 
         scoreText = _scoreText;
         playerHpText = _playerHpText;

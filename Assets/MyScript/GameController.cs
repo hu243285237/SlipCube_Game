@@ -34,7 +34,9 @@ public class GameController : MonoBehaviour
         //HelperXML.SetFileToPersistent();
 
 	    //开始游戏时加载排名信息进rankList
-        HelperXML.LoadXmlData();
+        HelperXML.LoadRankXmlData();
+        //开始游戏时加载金币值
+        //HelperXML.LoadCoinXmlData();
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -293,32 +295,36 @@ public class GameController : MonoBehaviour
 
         switch(currentColor)
         {
-            case Color.Green: 
+            case Color.Green:
                 GameData.score++;
-                break;
-
-            case Color.Blue:
-                GameData.score += 2;
-                break;
-
-            case Color.Orange:
-                if(GameData.playerHP < 3)
+                if (GameData.playerHP < 3)
                 {
                     GameData.playerHP++;
                 }
                 break;
 
+            case Color.Blue:
+                GameData.score++;
+                break;
+                /*
+            case Color.Orange:
+                if(GameData.playerHP < 3)
+                {
+                    GameData.playerHP++;
+                }
+                break;*/
+                /*
             case Color.Purple: 
                 GameData.score += 5;
                 // special affect
-                break;
+                break;*/
 
             case Color.Yellow:
-                GameData.playerHP--;
+                GameData.coin++;
                 break;
 
-            case Color.Red: 
-                GameData.playerHP = 0;
+            case Color.Red:
+                GameData.playerHP--;
                 break;
         }
     }
@@ -382,36 +388,36 @@ public class GameController : MonoBehaviour
 
         int random = Random.Range(0, 4);
 
-        //首先随机从四条边选择一条作为绿色
+        //首先随机从四条边选择一条作为蓝色
         switch(random)
         {
             case 0: 
-                nextTopEdge.GetComponent<EdgeInfo>().color = Color.Green;
-                nextTopEdge.GetComponent<Renderer>().material = MaterialManager.green;
+                nextTopEdge.GetComponent<EdgeInfo>().color = Color.Blue;
+                nextTopEdge.GetComponent<Renderer>().material = MaterialManager.blue;
                 nextPlaneEdgeList.Add(nextLeftEdge);
                 nextPlaneEdgeList.Add(nextRightEdge);
                 nextPlaneEdgeList.Add(nextBottomEdge);
                 break;
 
             case 1:
-                nextLeftEdge.GetComponent<EdgeInfo>().color = Color.Green;
-                nextLeftEdge.GetComponent<Renderer>().material = MaterialManager.green;
+                nextLeftEdge.GetComponent<EdgeInfo>().color = Color.Blue;
+                nextLeftEdge.GetComponent<Renderer>().material = MaterialManager.blue;
                 nextPlaneEdgeList.Add(nextTopEdge);
                 nextPlaneEdgeList.Add(nextRightEdge);
                 nextPlaneEdgeList.Add(nextBottomEdge);
                 break;
 
             case 2:
-                nextRightEdge.GetComponent<EdgeInfo>().color = Color.Green;
-                nextRightEdge.GetComponent<Renderer>().material = MaterialManager.green;
+                nextRightEdge.GetComponent<EdgeInfo>().color = Color.Blue;
+                nextRightEdge.GetComponent<Renderer>().material = MaterialManager.blue;
                 nextPlaneEdgeList.Add(nextTopEdge);
                 nextPlaneEdgeList.Add(nextLeftEdge);
                 nextPlaneEdgeList.Add(nextBottomEdge);
                 break;
 
             case 3:
-                nextBottomEdge.GetComponent<EdgeInfo>().color = Color.Green;
-                nextBottomEdge.GetComponent<Renderer>().material = MaterialManager.green;
+                nextBottomEdge.GetComponent<EdgeInfo>().color = Color.Blue;
+                nextBottomEdge.GetComponent<Renderer>().material = MaterialManager.blue;
                 nextPlaneEdgeList.Add(nextTopEdge);
                 nextPlaneEdgeList.Add(nextLeftEdge);
                 nextPlaneEdgeList.Add(nextRightEdge);
@@ -423,30 +429,20 @@ public class GameController : MonoBehaviour
         {
             int random2 = Random.Range(0, 100);
 
-            if (random2 >= 0 && random2 < 5)
+            if (random2 >= 0 && random2 < 70)
             {
                 nextPlaneEdgeList[i].GetComponent<EdgeInfo>().color = Color.Red;
                 nextPlaneEdgeList[i].GetComponent<Renderer>().material = MaterialManager.red;
             }
-            else if(random2 >=5 && random2 < 10)
-            {
-                nextPlaneEdgeList[i].GetComponent<EdgeInfo>().color = Color.Purple;
-                nextPlaneEdgeList[i].GetComponent<Renderer>().material = MaterialManager.purple;
-            }
-            else if (random2 >= 10 && random2 < 20)
-            {
-                nextPlaneEdgeList[i].GetComponent<EdgeInfo>().color = Color.Orange;
-                nextPlaneEdgeList[i].GetComponent<Renderer>().material = MaterialManager.orange;
-            }
-            else if (random2 >= 20 && random2 < 40)
-            {
-                nextPlaneEdgeList[i].GetComponent<EdgeInfo>().color = Color.Blue;
-                nextPlaneEdgeList[i].GetComponent<Renderer>().material = MaterialManager.blue;
-            }
-            else if (random2 >= 40 && random2 < 100)
+            else if (random2 >= 70 && random2 < 95)
             {
                 nextPlaneEdgeList[i].GetComponent<EdgeInfo>().color = Color.Yellow;
                 nextPlaneEdgeList[i].GetComponent<Renderer>().material = MaterialManager.yellow;
+            }
+            else if (random2 >= 95 && random2 < 100)
+            {
+                nextPlaneEdgeList[i].GetComponent<EdgeInfo>().color = Color.Green;
+                nextPlaneEdgeList[i].GetComponent<Renderer>().material = MaterialManager.green;
             }
         }
 

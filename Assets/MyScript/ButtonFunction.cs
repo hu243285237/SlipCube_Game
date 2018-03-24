@@ -29,8 +29,14 @@ public class ButtonFunction : MonoBehaviour
     /// </summary>
     public void _PropsButton()
     {
+        //进入道具界面
         CanvasManager.mainCanvas.SetActive(false);
         CanvasManager.propsCanvas.SetActive(true);
+
+        //加载金币信息
+        HelperXML.LoadCoinXmlData();
+
+        CanvasManager.coinText.text = "金币： " + GameData.coin.ToString();
     }
 
     /// <summary>
@@ -38,10 +44,12 @@ public class ButtonFunction : MonoBehaviour
     /// </summary>
     public void _RankButton()
     {
+        //进入排名界面
         CanvasManager.mainCanvas.SetActive(false);
         CanvasManager.rankCanvas.SetActive(true);
 
-        HelperXML.LoadXmlData();
+        //加载排名信息
+        HelperXML.LoadRankXmlData();
 
         string rankString = "";
         foreach (Rank rank in GameData.rankList)
@@ -66,8 +74,10 @@ public class ButtonFunction : MonoBehaviour
     /// </summary>
     public void _ReturnButton()
     {
+        //返回主界面
         CanvasManager.mainCanvas.SetActive(true);
 
+        //关闭当前界面
         CanvasManager.helpCanvas.SetActive(false);
         CanvasManager.propsCanvas.SetActive(false);
         CanvasManager.rankCanvas.SetActive(false);
@@ -80,11 +90,16 @@ public class ButtonFunction : MonoBehaviour
     /// </summary>
     public void _ConfirmNameButton()
     {
+        //更新排名信息
         string name = CanvasManager.nameInputField.text;
         Rank rank = new Rank(name, GameData.score);
         GameData.rankList.Add(rank);
-        HelperXML.UpdateXmlFile();
+        HelperXML.UpdateRankXmlFile();
 
+        //更新金币信息
+        HelperXML.UpdateCoinXmlFile();
+
+        //切换回主界面
         CanvasManager.endGameCanvas.SetActive(false);
         CanvasManager.mainCanvas.SetActive(true);
     }
