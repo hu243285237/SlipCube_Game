@@ -132,7 +132,14 @@ public class HelperXML : MonoBehaviour
     /// </summary>
     private static void SortRankList()
     {
+        //排序
         GameData.rankList.Sort((x, y) => y.score.CompareTo(x.score));
+
+        //只保留1到10名，删除后面的排名
+        if (GameData.rankList.Count > 9)
+        {
+            GameData.rankList.RemoveRange(10, GameData.rankList.Count - 10);
+        }
     }
 
     //----------------------------------------------------------------------------------
