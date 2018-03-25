@@ -30,13 +30,10 @@ public class GameController : MonoBehaviour
     {
         RandomColor();
 
-        //当运行程序时，将已存在的xml文件存到persistent目录下
-        //HelperXML.SetFileToPersistent();
-
 	    //开始游戏时加载排名信息进rankList
         HelperXML.LoadRankXmlData();
         //开始游戏时加载金币值
-        //HelperXML.LoadCoinXmlData();
+        HelperXML.LoadCoinXmlData();
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -306,18 +303,6 @@ public class GameController : MonoBehaviour
             case Color.Blue:
                 GameData.score++;
                 break;
-                /*
-            case Color.Orange:
-                if(GameData.playerHP < 3)
-                {
-                    GameData.playerHP++;
-                }
-                break;*/
-                /*
-            case Color.Purple: 
-                GameData.score += 5;
-                // special affect
-                break;*/
 
             case Color.Yellow:
                 GameData.coin++;
