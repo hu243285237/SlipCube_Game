@@ -52,11 +52,9 @@ public class CanvasManager : MonoBehaviour
     public static GameObject propsReturnButton;
 
     //-----------------------------------排行榜界面UI------------------------------
-
-    public Text _rankText;
+    
     public GameObject _rankReturnButton;
-
-    public static Text rankText;
+    
     public static GameObject rankReturnButton;
 
     //-----------------------------------游戏中界面UI------------------------------
@@ -100,8 +98,7 @@ public class CanvasManager : MonoBehaviour
 
         coinText = _coinText;
         propsReturnButton = _propsReturnButton;
-
-        rankText = _rankText;
+        
         rankReturnButton = _rankReturnButton;
 
         scoreText = _scoreText;

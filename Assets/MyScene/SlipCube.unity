@@ -250,7 +250,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 60
+  m_Text: 
 --- !u!222 &44542102
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -979,7 +979,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u963F\u65AF\u987F\u963F\u4E09"
+  m_Text: 
 --- !u!222 &148023832
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1408,7 +1408,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u963F\u8428\u5FB7\u662F\u5565"
+  m_Text: 
 --- !u!222 &243058810
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2305,7 +2305,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CDKKKK
+  m_Text: 
 --- !u!222 &431727203
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2488,7 +2488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 461036960}
   m_Layer: 5
-  m_Name: RankSeven
+  m_Name: Rank7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2711,7 +2711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &585662287
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3250,7 +3250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &727769328
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3270,7 +3270,6 @@ RectTransform:
   - {fileID: 2101001636}
   - {fileID: 461036960}
   - {fileID: 939210003}
-  - {fileID: 1092782292}
   m_Father: {fileID: 1813959643}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4575,7 +4574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 899198915}
   m_Layer: 5
-  m_Name: RankFive
+  m_Name: Rank5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5222,7 +5221,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 724
+  m_Text: 
 --- !u!222 &987484873
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5238,7 +5237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 996578748}
   m_Layer: 5
-  m_Name: RankTwo
+  m_Name: Rank2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5321,7 +5320,6 @@ MonoBehaviour:
   _helpReturnButton: {fileID: 71680572}
   _coinText: {fileID: 2119692651}
   _propsReturnButton: {fileID: 361255687}
-  _rankText: {fileID: 1092782293}
   _rankReturnButton: {fileID: 939210002}
   _scoreText: {fileID: 817528890}
   _playerHpText: {fileID: 1838059992}
@@ -5895,80 +5893,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1092782291
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1092782292}
-  - component: {fileID: 1092782294}
-  - component: {fileID: 1092782293}
-  m_Layer: 5
-  m_Name: RankText
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1092782292
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1092782291}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 727769328}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 600, y: 600}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1092782293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1092782291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 36
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\u8FD9\u91CC\u8FD8\u5565\u90FD\u6CA1\u6709\u5462"
---- !u!222 &1092782294
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1092782291}
 --- !u!1 &1092856184
 GameObject:
   m_ObjectHideFlags: 0
@@ -6437,7 +6361,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 
 --- !u!222 &1161486633
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6511,7 +6435,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 22
+  m_Text: 
 --- !u!222 &1201504101
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6527,7 +6451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1206475766}
   m_Layer: 5
-  m_Name: RankThree
+  m_Name: Rank3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6621,7 +6545,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &1210903735
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6727,7 +6651,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u53F6\u72AC\u5CF0\u5403\u5927\u4FBF"
+  m_Text: 
 --- !u!222 &1253391304
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8613,7 +8537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1555761700}
   m_Layer: 5
-  m_Name: RankOne
+  m_Name: Rank1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9622,7 +9546,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u53F2\u8482\u592Bdfg"
+  m_Text: 
 --- !u!222 &1687720850
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10435,7 +10359,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 
 --- !u!222 &1828416475
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11038,7 +10962,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4E8C\u624B\u5355\u53CD\u7684"
+  m_Text: 
 --- !u!222 &1925130647
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11449,7 +11373,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2
+  m_Text: 
 --- !u!222 &1984492425
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11580,7 +11504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2017926439}
   m_Layer: 5
-  m_Name: RankFour
+  m_Name: Rank4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11674,7 +11598,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u662F\u5FB7\u56FD\u963F\u8FBE"
+  m_Text: 
 --- !u!222 &2028616655
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11961,7 +11885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2101001636}
   m_Layer: 5
-  m_Name: RankSix
+  m_Name: Rank6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ButtonFunction : MonoBehaviour
 {
@@ -50,13 +51,15 @@ public class ButtonFunction : MonoBehaviour
 
         //加载排名信息
         HelperXML.LoadRankXmlData();
-
-        string rankString = "";
-        foreach (Rank rank in GameData.rankList)
+        
+        //将排名信息显示到UI
+        for (int i = 1; i <= GameData.rankList.Count; i++)
         {
-            rankString += "排名：" + (GameData.rankList.IndexOf(rank) + 1) + " 分数：" + rank.score + " 名字：" + rank.name + "\n";
+            GameObject nameText = GameObject.Find("Canvas/RankCanvas/Rank" + i + "/NameImage/Text");
+            GameObject scoreText = GameObject.Find("Canvas/RankCanvas/Rank" + i + "/ScoreImage/Text");
+            nameText.GetComponent<Text>().text = GameData.rankList[i - 1].name;
+            scoreText.GetComponent<Text>().text = GameData.rankList[i - 1].score.ToString();
         }
-        CanvasManager.rankText.text = rankString;
     }
 
     /// <summary>
