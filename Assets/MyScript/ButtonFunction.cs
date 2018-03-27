@@ -26,21 +26,6 @@ public class ButtonFunction : MonoBehaviour
     }
 
     /// <summary>
-    /// 道具按钮
-    /// </summary>
-    public void _PropsButton()
-    {
-        //进入道具界面
-        CanvasManager.mainCanvas.SetActive(false);
-        CanvasManager.propsCanvas.SetActive(true);
-
-        //加载金币信息
-        //HelperXML.LoadCoinXmlData();
-
-        CanvasManager.coinText.text = "金币： " + GameData.coin.ToString();
-    }
-
-    /// <summary>
     /// 排名按钮
     /// </summary>
     public void _RankButton()
@@ -50,7 +35,6 @@ public class ButtonFunction : MonoBehaviour
         CanvasManager.rankCanvas.SetActive(true);
 
         //加载排名信息
-        //HelperXML.LoadRankXmlData();
         BmobController.DownloadRankList();
         
         //将排名信息显示到UI
@@ -83,7 +67,6 @@ public class ButtonFunction : MonoBehaviour
 
         //关闭当前界面
         CanvasManager.helpCanvas.SetActive(false);
-        CanvasManager.propsCanvas.SetActive(false);
         CanvasManager.rankCanvas.SetActive(false);
     }
 
@@ -94,19 +77,15 @@ public class ButtonFunction : MonoBehaviour
     /// </summary>
     public void _ConfirmNameButton()
     {
-        //更新排名信息
-        Rank rank = new Rank();
-
-        rank.playerName = CanvasManager.nameInputField.text;
-        rank.score = GameData.score;
-
+        //上传排名信息
+        Rank rank = new Rank
+        {
+            playerName = CanvasManager.nameInputField.text,
+            score = GameData.score
+        };
         BmobController.UploadRank(rank);
-
-        //GameData.rankList.Add(rank);
+        
         //HelperXML.UpdateRankXmlFile();
-
-        //更新金币信息
-        //HelperXML.UpdateCoinXmlFile();
 
         //切换回主界面
         CanvasManager.endGameCanvas.SetActive(false);

@@ -7,14 +7,12 @@ public class CanvasManager : MonoBehaviour
 
     public GameObject _mainCanvas;
     public GameObject _helpCanvas;
-    public GameObject _propsCanvas;
     public GameObject _rankCanvas;
     public GameObject _playingCanvas;
     public GameObject _endGameCanvas;
 
     public static GameObject mainCanvas;
     public static GameObject helpCanvas;
-    public static GameObject propsCanvas;
     public static GameObject rankCanvas;
     public static GameObject playingCanvas;
     public static GameObject endGameCanvas;
@@ -24,14 +22,12 @@ public class CanvasManager : MonoBehaviour
     public GameObject _titleText;
     public GameObject _startButton;
     public GameObject _helpButton;
-    public GameObject _propsButton;
     public GameObject _rankButton;
     public GameObject _quitButton;
 
     public static GameObject titleText;
     public static GameObject startButton;
     public static GameObject helpButton;
-    public static GameObject propsButton;
     public static GameObject rankButton;
     public static GameObject quitButton;
 
@@ -42,14 +38,6 @@ public class CanvasManager : MonoBehaviour
 
     public static GameObject helpText;
     public static GameObject helpReturnButton;
-
-    //------------------------------------道具界面UI-------------------------------
-
-    public Text _coinText;
-    public GameObject _propsReturnButton;
-
-    public static Text coinText;
-    public static GameObject propsReturnButton;
 
     //-----------------------------------排行榜界面UI------------------------------
     
@@ -81,7 +69,6 @@ public class CanvasManager : MonoBehaviour
     {
         mainCanvas = _mainCanvas;
         helpCanvas = _helpCanvas;
-        propsCanvas = _propsCanvas;
         rankCanvas = _rankCanvas;
         playingCanvas = _playingCanvas;
         endGameCanvas = _endGameCanvas;
@@ -89,15 +76,11 @@ public class CanvasManager : MonoBehaviour
         titleText = _titleText;
         startButton = _startButton;
         helpButton = _helpButton;
-        propsButton = _propsButton;
         rankButton = _rankButton;
         quitButton = _quitButton;
 
         helpText = _helpText;
         helpReturnButton = _helpReturnButton;
-
-        coinText = _coinText;
-        propsReturnButton = _propsReturnButton;
         
         rankReturnButton = _rankReturnButton;
 

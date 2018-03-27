@@ -32,8 +32,6 @@ public class GameController : MonoBehaviour
 
 	    //开始游戏时加载排名信息进rankList
         //HelperXML.LoadRankXmlData();
-        //开始游戏时加载金币值
-        //HelperXML.LoadCoinXmlData();
     }
 
     //---------------------------------------------------------------------------------------------------
