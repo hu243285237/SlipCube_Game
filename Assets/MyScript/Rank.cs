@@ -1,29 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using cn.bmob.io;
 
 /// <summary>
 /// 排名类
 /// </summary>
-public class Rank
+public class Rank : BmobTable
 {
-    public string name;         //名字
-    public int score;           //分数
+    public string playerName { get; set; }      //名字
+    public BmobInt score { get; set; }          //分数
 
     //-----------------------------------------------------------------
-    
-    public Rank()
-    {
 
+    /// <summary>
+    /// 重写读数据的方法
+    /// </summary>
+    public override void readFields(BmobInput input)
+    {
+        base.readFields(input);
+
+        this.playerName = input.getString("playerName");
+        this.score = input.getInt("score");
     }
 
     //-----------------------------------------------------------------
 
-    public Rank(string name, int score)
+    /// <summary>
+    /// 重写写数据的方法
+    /// </summary>
+    public override void write(BmobOutput output, bool all)
     {
-        this.name = name;
-        this.score = score;
+        base.write(output, all);
+
+        output.Put("playerName", this.playerName);
+        output.Put("score", this.score);
     }
-    
+
     //-----------------------------------------------------------------
 }

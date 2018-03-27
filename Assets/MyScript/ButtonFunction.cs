@@ -35,7 +35,7 @@ public class ButtonFunction : MonoBehaviour
         CanvasManager.propsCanvas.SetActive(true);
 
         //加载金币信息
-        HelperXML.LoadCoinXmlData();
+        //HelperXML.LoadCoinXmlData();
 
         CanvasManager.coinText.text = "金币： " + GameData.coin.ToString();
     }
@@ -50,14 +50,15 @@ public class ButtonFunction : MonoBehaviour
         CanvasManager.rankCanvas.SetActive(true);
 
         //加载排名信息
-        HelperXML.LoadRankXmlData();
+        //HelperXML.LoadRankXmlData();
+        BmobController.DownloadRankList();
         
         //将排名信息显示到UI
         for (int i = 1; i <= GameData.rankList.Count; i++)
         {
             GameObject nameText = GameObject.Find("Canvas/RankCanvas/Rank" + i + "/NameImage/Text");
             GameObject scoreText = GameObject.Find("Canvas/RankCanvas/Rank" + i + "/ScoreImage/Text");
-            nameText.GetComponent<Text>().text = GameData.rankList[i - 1].name;
+            nameText.GetComponent<Text>().text = GameData.rankList[i - 1].playerName;
             scoreText.GetComponent<Text>().text = GameData.rankList[i - 1].score.ToString();
         }
     }
@@ -94,13 +95,18 @@ public class ButtonFunction : MonoBehaviour
     public void _ConfirmNameButton()
     {
         //更新排名信息
-        string name = CanvasManager.nameInputField.text;
-        Rank rank = new Rank(name, GameData.score);
-        GameData.rankList.Add(rank);
-        HelperXML.UpdateRankXmlFile();
+        Rank rank = new Rank();
+
+        rank.playerName = CanvasManager.nameInputField.text;
+        rank.score = GameData.score;
+
+        BmobController.UploadRank(rank);
+
+        //GameData.rankList.Add(rank);
+        //HelperXML.UpdateRankXmlFile();
 
         //更新金币信息
-        HelperXML.UpdateCoinXmlFile();
+        //HelperXML.UpdateCoinXmlFile();
 
         //切换回主界面
         CanvasManager.endGameCanvas.SetActive(false);
