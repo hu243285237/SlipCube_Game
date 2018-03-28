@@ -45,6 +45,8 @@ public class ButtonFunction : MonoBehaviour
             nameText.GetComponent<Text>().text = GameData.rankList[i - 1].playerName;
             scoreText.GetComponent<Text>().text = GameData.rankList[i - 1].score.ToString();
         }
+
+        Debug.Log("显示UI完毕");
     }
 
     /// <summary>

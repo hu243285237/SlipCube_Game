@@ -4,6 +4,9 @@ using UnityEngine;
 using cn.bmob.api;
 using cn.bmob.io;
 
+/// <summary>
+/// 对Bmob的操作类
+/// </summary>
 public sealed class BmobController : MonoBehaviour
 {
     private static BmobUnity bmobUnity;
@@ -41,12 +44,17 @@ public sealed class BmobController : MonoBehaviour
     /// </summary>
     public static void DownloadRankList()
     {
+        //bmobQuery用于查询相关
         BmobQuery bmobQuery = new BmobQuery();
+        //以分数来从高到低排序
         bmobQuery.OrderByDescending("score");
+        //只查询前七名
         bmobQuery.Limit(7);
 
         bmobUnity.Find<Rank>("RankTable", bmobQuery, (resp, exception) =>
         {
+            Debug.Log("进入Find");
+
             if (exception != null)
             {
                 print("查询失败，失败原因为：" + exception.Message);
@@ -54,7 +62,7 @@ public sealed class BmobController : MonoBehaviour
             }
             GameData.rankList = resp.results;
 
-            Debug.Log("查询排名成功！");
+            Debug.Log("查询完毕");
         });
     }
 
