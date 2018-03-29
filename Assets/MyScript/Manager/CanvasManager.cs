@@ -10,12 +10,14 @@ public class CanvasManager : MonoBehaviour
     public GameObject _rankCanvas;
     public GameObject _playingCanvas;
     public GameObject _endGameCanvas;
+    public GameObject _loadingCanvas;
 
     public static GameObject mainCanvas;
     public static GameObject helpCanvas;
     public static GameObject rankCanvas;
     public static GameObject playingCanvas;
     public static GameObject endGameCanvas;
+    public static GameObject loadingCanvas;
 
     //------------------------------------主界面UI-------------------------------
 
@@ -72,6 +74,7 @@ public class CanvasManager : MonoBehaviour
         rankCanvas = _rankCanvas;
         playingCanvas = _playingCanvas;
         endGameCanvas = _endGameCanvas;
+        loadingCanvas = _loadingCanvas;
 
         titleText = _titleText;
         startButton = _startButton;

@@ -33,7 +33,9 @@ public sealed class BmobController : MonoBehaviour
                 return;
             }
 
-            print("保存成功,@" + resp.createdAt);
+            LoadingNetwork.isDoneUpload = true;
+
+            print("上传数据成功,@" + resp.createdAt);
         });
     }
 
@@ -53,14 +55,14 @@ public sealed class BmobController : MonoBehaviour
 
         bmobUnity.Find<Rank>("RankTable", bmobQuery, (resp, exception) =>
         {
-            Debug.Log("进入Find");
-
             if (exception != null)
             {
                 print("查询失败，失败原因为：" + exception.Message);
                 return;
             }
             GameData.rankList = resp.results;
+
+            LoadingNetwork.isDoneLoading = true;
 
             Debug.Log("查询完毕");
         });
