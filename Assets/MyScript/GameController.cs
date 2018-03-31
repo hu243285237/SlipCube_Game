@@ -29,9 +29,6 @@ public class GameController : MonoBehaviour
     void Start() 
     {
         RandomColor();
-
-	    //开始游戏时加载排名信息进rankList
-        //HelperXML.LoadRankXmlData();
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -303,7 +300,7 @@ public class GameController : MonoBehaviour
                 break;
 
             case Color.Yellow:
-                GameData.coin++;
+                //GameData.coin++;
                 break;
 
             case Color.Red:

@@ -59,6 +59,7 @@ public class ButtonFunction : MonoBehaviour
         //关闭当前界面
         CanvasManager.helpCanvas.SetActive(false);
         CanvasManager.rankCanvas.SetActive(false);
+        CanvasManager.loadingCanvas.SetActive(false);
     }
 
     //---------------------------------游戏结束界面按钮---------------------------------------
