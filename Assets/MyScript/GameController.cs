@@ -299,10 +299,6 @@ public class GameController : MonoBehaviour
                 GameData.score++;
                 break;
 
-            case Color.Yellow:
-                //GameData.coin++;
-                break;
-
             case Color.Red:
                 GameData.playerHP--;
                 break;
@@ -316,15 +312,16 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void RandomColor()
     {
-        //将要旋转到的下一个面的除绿色外的三个边的集合
+        //将要旋转到的下一个面的三个红色边集合
         List<GameObject> nextPlaneEdgeList = new List<GameObject>();
 
-        //下一面的四个边，用来随机颜色
+        //下一面的四个边
         GameObject nextTopEdge = null;
         GameObject nextLeftEdge = null;
         GameObject nextRightEdge = null;
         GameObject nextBottomEdge = null;
 
+	//游戏开始时的第一个面
         if (rotateDirectionList.Count == 0)
         {
             nextTopEdge = ObjectManager.forwardTopTrigger.GetComponent<TriggerInfo>().currentEdge;
@@ -365,65 +362,70 @@ public class GameController : MonoBehaviour
                     break;
             }
         }
-
+	
+	//随机,选哪条边
         int random = Random.Range(0, 4);
+	
+	//随机,选蓝色或绿色
+	int random2 = Random.Range(0,100);
+	
+	//用于储存随机到的颜色
+	Color randomColor = null;
+	Material randomMaterial = null;
+	
+	//随机蓝色或绿色
+	if(random2 >= 0 && random2 < 70)
+	{
+		randomColor = Color.Blue;
+		randomMaterial = MaterialManager.blue;
+	}
+	else if(random2 >= 70 && random2 <100)
+	{
+		randomColor = Color.Green;
+		randomMaterial = MaterialManager.green;
+	}
 
-        //首先随机从四条边选择一条作为蓝色
+        //首先随机从四条边选择一条作为蓝色或绿色
         switch(random)
         {
             case 0: 
-                nextTopEdge.GetComponent<EdgeInfo>().color = Color.Blue;
-                nextTopEdge.GetComponent<Renderer>().material = MaterialManager.blue;
+                nextTopEdge.GetComponent<EdgeInfo>().color = randomColor;
+                nextTopEdge.GetComponent<Renderer>().material = randomMaterial;
                 nextPlaneEdgeList.Add(nextLeftEdge);
                 nextPlaneEdgeList.Add(nextRightEdge);
                 nextPlaneEdgeList.Add(nextBottomEdge);
                 break;
 
             case 1:
-                nextLeftEdge.GetComponent<EdgeInfo>().color = Color.Blue;
-                nextLeftEdge.GetComponent<Renderer>().material = MaterialManager.blue;
+                nextLeftEdge.GetComponent<EdgeInfo>().color = randomColor;
+                nextLeftEdge.GetComponent<Renderer>().material = randomMaterial;
                 nextPlaneEdgeList.Add(nextTopEdge);
                 nextPlaneEdgeList.Add(nextRightEdge);
                 nextPlaneEdgeList.Add(nextBottomEdge);
                 break;
 
             case 2:
-                nextRightEdge.GetComponent<EdgeInfo>().color = Color.Blue;
-                nextRightEdge.GetComponent<Renderer>().material = MaterialManager.blue;
+                nextRightEdge.GetComponent<EdgeInfo>().color = randomColor;
+                nextRightEdge.GetComponent<Renderer>().material = randomMaterial;
                 nextPlaneEdgeList.Add(nextTopEdge);
                 nextPlaneEdgeList.Add(nextLeftEdge);
                 nextPlaneEdgeList.Add(nextBottomEdge);
                 break;
 
             case 3:
-                nextBottomEdge.GetComponent<EdgeInfo>().color = Color.Blue;
-                nextBottomEdge.GetComponent<Renderer>().material = MaterialManager.blue;
+                nextBottomEdge.GetComponent<EdgeInfo>().color = randomColor;
+                nextBottomEdge.GetComponent<Renderer>().material = randomMaterial;
                 nextPlaneEdgeList.Add(nextTopEdge);
                 nextPlaneEdgeList.Add(nextLeftEdge);
                 nextPlaneEdgeList.Add(nextRightEdge);
                 break;
         }
 
-        //剩下的三个边随机颜色
+        //剩下的三个边变为红色
         for (int i = 0; i < nextPlaneEdgeList.Count; i++)
         {
-            int random2 = Random.Range(0, 100);
-
-            if (random2 >= 0 && random2 < 70)
-            {
                 nextPlaneEdgeList[i].GetComponent<EdgeInfo>().color = Color.Red;
                 nextPlaneEdgeList[i].GetComponent<Renderer>().material = MaterialManager.red;
-            }
-            else if (random2 >= 70 && random2 < 95)
-            {
-                nextPlaneEdgeList[i].GetComponent<EdgeInfo>().color = Color.Yellow;
-                nextPlaneEdgeList[i].GetComponent<Renderer>().material = MaterialManager.yellow;
-            }
-            else if (random2 >= 95 && random2 < 100)
-            {
-                nextPlaneEdgeList[i].GetComponent<EdgeInfo>().color = Color.Green;
-                nextPlaneEdgeList[i].GetComponent<Renderer>().material = MaterialManager.green;
-            }
         }
 
         nextPlaneEdgeList.Clear();
