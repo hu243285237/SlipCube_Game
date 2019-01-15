@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
 {
     //----------------------------------------------------------------------------------------------------
 
+    public GameObject mainCube;//立方体
+
     [Range( 1.0f, 20.0f)]
     public float rotateTime = 14.0f;//旋转的时间
 
@@ -23,13 +25,6 @@ public class GameController : MonoBehaviour
     private List<RotateDirection> rotateDirectionList = new List<RotateDirection>();//储存旋转方向的list
     
     public Text debugText;
-
-    //---------------------------------------------------------------------------------------------------
-
-    void Start() 
-    {
-        RandomColor();
-    }
 
     //---------------------------------------------------------------------------------------------------
 
@@ -52,7 +47,6 @@ public class GameController : MonoBehaviour
     {
         //初始化游戏数据
         GameData.score = 0;
-        GameData.playerHP = 3;
         GameData.currentOrder = 0;
         GameData.countdownTime = 5.0f;
         GameData.countdownSpeed = 1.0f;
@@ -63,13 +57,12 @@ public class GameController : MonoBehaviour
         CanvasManager.mainCanvas.SetActive(false);
         CanvasManager.playingCanvas.SetActive(true);
 
-        CanvasManager.playerHpText.text = "HP : " + GameData.playerHP;
         CanvasManager.scoreText.text = "Score : " + GameData.score;
 
         //以防时间条闪一下
         CanvasManager.countdownSlider.value = GameData.countdownTime;
 
-        ObjectManager.cube.SetActive(true);
+        mainCube.SetActive(true);
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -79,10 +72,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void PlayingGame() 
     {
-        if (GameData.playerHP > 0)
-        {
-            JudgeGesture();//判断玩家的滑动手势
-        }
+        JudgeGesture();
 
         //如果立方体旋转的次数不等于滑动手势的次数
         if (GameData.currentOrder != rotateDirectionList.Count)
@@ -97,7 +87,9 @@ public class GameController : MonoBehaviour
 
         GameData.countdownTime -= GameData.countdownSpeed * Time.deltaTime;
         CanvasManager.countdownSlider.value = GameData.countdownTime;
-        JudgeTimeGameOver();
+
+        //当时间不够时游戏结束
+        if (GameData.countdownTime <= 0) GameData.gameState = GameState.End;
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -112,7 +104,7 @@ public class GameController : MonoBehaviour
         CanvasManager.playingCanvas.SetActive(false);
         CanvasManager.endGameCanvas.SetActive(true);
 
-        ObjectManager.cube.SetActive(false);
+        mainCube.SetActive(false);
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -200,9 +192,6 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void StartRotateCube() 
     {
-        JudgeColor();
-        RandomColor();
-
         //旋转的状态变为Update
         rotateState = RotateState.Update;
 
@@ -229,7 +218,7 @@ public class GameController : MonoBehaviour
         }
 
         //旋转ing，根据世界坐标系
-        ObjectManager.cube.transform.Rotate(rotateAngles, Space.World);
+        mainCube.transform.Rotate(rotateAngles, Space.World);
 
         //旋转增量，用来计算当前旋转了多少度
         deltaRotateCount += (90 / rotateTime);
@@ -250,212 +239,14 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void EndRotateCube()
     {
+        GameData.score++;//分数+1
         GameData.currentOrder++;//滑动次数+1
-        rotateState = RotateState.Start;
-        RaiseCountdownSpeed();//增加倒计时的速度
 
-        CanvasManager.playerHpText.text = "HP : " + GameData.playerHP;
+        if (GameData.currentOrder % 10 == 0) GameData.countdownSpeed++; ;//逐渐增加倒计时的速度
+
         CanvasManager.scoreText.text = "Score : " + GameData.score;
-    }
 
-    //---------------------------------------------------------------------------------------------------
-
-    /// <summary>
-    /// 判断滑动方向的边是什么颜色，然后触发特殊效果
-    /// </summary>
-    private void JudgeColor() 
-    {
-        Color currentColor = Color.Green;
-
-        if(rotateDirectionList[GameData.currentOrder] == RotateDirection.Up)
-        {
-            currentColor = ObjectManager.forwardTopTrigger.GetComponent<TriggerInfo>().currentEdge.GetComponent<EdgeInfo>().color;
-        }
-        else if (rotateDirectionList[GameData.currentOrder] == RotateDirection.Left)
-        {
-            currentColor = ObjectManager.forwardLeftTrigger.GetComponent<TriggerInfo>().currentEdge.GetComponent<EdgeInfo>().color;
-        }
-        else if (rotateDirectionList[GameData.currentOrder] == RotateDirection.Right)
-        {
-            currentColor = ObjectManager.forwardRightTrigger.GetComponent<TriggerInfo>().currentEdge.GetComponent<EdgeInfo>().color;
-        }
-        else if (rotateDirectionList[GameData.currentOrder] == RotateDirection.Down)
-        {
-            currentColor = ObjectManager.forwardBottomTrigger.GetComponent<TriggerInfo>().currentEdge.GetComponent<EdgeInfo>().color;
-        }
-
-        switch(currentColor)
-        {
-            case Color.Green:
-                GameData.score++;
-                if (GameData.playerHP < 3)
-                {
-                    GameData.playerHP++;
-                }
-                break;
-
-            case Color.Blue:
-                GameData.score++;
-                break;
-
-            case Color.Red:
-                GameData.playerHP--;
-                break;
-        }
-    }
-
-    //---------------------------------------------------------------------------------------------------
-
-    /// <summary>
-    /// 随机产生颜色
-    /// </summary>
-    private void RandomColor()
-    {
-        /*
-        //将要旋转到的下一个面的三个红色边集合
-        List<GameObject> nextPlaneEdgeList = new List<GameObject>();
-
-        //下一面的四个边
-        GameObject nextTopEdge = null;
-        GameObject nextLeftEdge = null;
-        GameObject nextRightEdge = null;
-        GameObject nextBottomEdge = null;
-
-	//游戏开始时的第一个面
-        if (rotateDirectionList.Count == 0)
-        {
-            nextTopEdge = ObjectManager.forwardTopTrigger.GetComponent<TriggerInfo>().currentEdge;
-            nextLeftEdge = ObjectManager.forwardLeftTrigger.GetComponent<TriggerInfo>().currentEdge;
-            nextRightEdge = ObjectManager.forwardRightTrigger.GetComponent<TriggerInfo>().currentEdge;
-            nextBottomEdge = ObjectManager.forwardBottomTrigger.GetComponent<TriggerInfo>().currentEdge;
-        }
-        else 
-        {
-            switch (rotateDirectionList[GameData.currentOrder])
-            {
-                case RotateDirection.Down:
-                    nextTopEdge = ObjectManager.topTopTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextLeftEdge = ObjectManager.topLeftTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextRightEdge = ObjectManager.topRightTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextBottomEdge = ObjectManager.topBottomTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    break;
-
-                case RotateDirection.Right:
-                    nextTopEdge = ObjectManager.leftTopTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextLeftEdge = ObjectManager.leftLeftTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextRightEdge = ObjectManager.leftRightTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextBottomEdge = ObjectManager.leftBottomTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    break;
-
-                case RotateDirection.Left:
-                    nextTopEdge = ObjectManager.rightTopTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextLeftEdge = ObjectManager.rightLeftTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextRightEdge = ObjectManager.rightRightTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextBottomEdge = ObjectManager.rightBottomTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    break;
-
-                case RotateDirection.Up:
-                    nextTopEdge = ObjectManager.bottomTopTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextLeftEdge = ObjectManager.bottomLeftTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextRightEdge = ObjectManager.bottomRightTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    nextBottomEdge = ObjectManager.bottomBottomTrigger.GetComponent<TriggerInfo>().currentEdge;
-                    break;
-            }
-        }
-	
-	//随机,选哪条边
-        int random = Random.Range(0, 4);
-	
-	//随机,选蓝色或绿色
-	int random2 = Random.Range(0,100);
-	
-	//用于储存随机到的颜色
-	Color randomColor;
-	Material randomMaterial = null;
-	
-	//随机蓝色或绿色
-	if(random2 >= 0 && random2 < 70)
-	{
-		randomColor = Color.Blue;
-		randomMaterial = MaterialManager.blue;
-	}
-	else if(random2 >= 70 && random2 <100)
-	{
-		randomColor = Color.Green;
-		randomMaterial = MaterialManager.green;
-	}
-
-        //首先随机从四条边选择一条作为蓝色或绿色
-        switch(random)
-        {
-            case 0: 
-                nextTopEdge.GetComponent<EdgeInfo>().color = randomColor;
-                nextTopEdge.GetComponent<Renderer>().material = randomMaterial;
-                nextPlaneEdgeList.Add(nextLeftEdge);
-                nextPlaneEdgeList.Add(nextRightEdge);
-                nextPlaneEdgeList.Add(nextBottomEdge);
-                break;
-
-            case 1:
-                nextLeftEdge.GetComponent<EdgeInfo>().color = randomColor;
-                nextLeftEdge.GetComponent<Renderer>().material = randomMaterial;
-                nextPlaneEdgeList.Add(nextTopEdge);
-                nextPlaneEdgeList.Add(nextRightEdge);
-                nextPlaneEdgeList.Add(nextBottomEdge);
-                break;
-
-            case 2:
-                nextRightEdge.GetComponent<EdgeInfo>().color = randomColor;
-                nextRightEdge.GetComponent<Renderer>().material = randomMaterial;
-                nextPlaneEdgeList.Add(nextTopEdge);
-                nextPlaneEdgeList.Add(nextLeftEdge);
-                nextPlaneEdgeList.Add(nextBottomEdge);
-                break;
-
-            case 3:
-                nextBottomEdge.GetComponent<EdgeInfo>().color = randomColor;
-                nextBottomEdge.GetComponent<Renderer>().material = randomMaterial;
-                nextPlaneEdgeList.Add(nextTopEdge);
-                nextPlaneEdgeList.Add(nextLeftEdge);
-                nextPlaneEdgeList.Add(nextRightEdge);
-                break;
-        }
-
-        //剩下的三个边变为红色
-        for (int i = 0; i < nextPlaneEdgeList.Count; i++)
-        {
-                nextPlaneEdgeList[i].GetComponent<EdgeInfo>().color = Color.Red;
-                nextPlaneEdgeList[i].GetComponent<Renderer>().material = MaterialManager.red;
-        }
-
-        nextPlaneEdgeList.Clear();*/
-    }
-
-    //---------------------------------------------------------------------------------------------------
-
-    /// <summary>
-    /// 逐渐增加倒计时的速度
-    /// </summary>
-    private void RaiseCountdownSpeed()
-    {
-        if (GameData.currentOrder % 10 == 0)
-        {
-            GameData.countdownSpeed++;
-        }
-    }
-
-    //---------------------------------------------------------------------------------------------------
-
-    /// <summary>
-    /// 判断玩家是否游戏失败，Time
-    /// </summary>
-    private void JudgeTimeGameOver()
-    {
-        if (GameData.countdownTime <= 0)
-        {
-            //当前游戏状态变为End
-            GameData.gameState = GameState.End;
-        }
+        rotateState = RotateState.Start;
     }
 
     //---------------------------------------------------------------------------------------------------

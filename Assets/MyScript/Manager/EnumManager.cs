@@ -40,18 +40,3 @@ public enum RotateState
 }
 
 //--------------------------------------------------------
-
-/// <summary>
-/// 颜色
-/// </summary>
-public enum Color 
-{ 
-    Green,
-    Yellow,
-    Blue,
-    Orange,
-    Purple,
-    Red
-}
-
-//--------------------------------------------------------

@@ -7,4 +7,4 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/MyScene/SlipCube.unity
-    guid: 00000000000000000000000000000000
+    guid: ca17639dd3dd8be46a6ea4e7fc9047d8
