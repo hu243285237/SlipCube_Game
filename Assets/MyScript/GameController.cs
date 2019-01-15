@@ -253,7 +253,6 @@ public class GameController : MonoBehaviour
         GameData.currentOrder++;//滑动次数+1
         rotateState = RotateState.Start;
         RaiseCountdownSpeed();//增加倒计时的速度
-        JudgeHpGameOver();//判断游戏是否结束
 
         CanvasManager.playerHpText.text = "HP : " + GameData.playerHP;
         CanvasManager.scoreText.text = "Score : " + GameData.score;
@@ -312,6 +311,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void RandomColor()
     {
+        /*
         //将要旋转到的下一个面的三个红色边集合
         List<GameObject> nextPlaneEdgeList = new List<GameObject>();
 
@@ -370,7 +370,7 @@ public class GameController : MonoBehaviour
 	int random2 = Random.Range(0,100);
 	
 	//用于储存随机到的颜色
-	Color randomColor = null;
+	Color randomColor;
 	Material randomMaterial = null;
 	
 	//随机蓝色或绿色
@@ -428,7 +428,7 @@ public class GameController : MonoBehaviour
                 nextPlaneEdgeList[i].GetComponent<Renderer>().material = MaterialManager.red;
         }
 
-        nextPlaneEdgeList.Clear();
+        nextPlaneEdgeList.Clear();*/
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -441,20 +441,6 @@ public class GameController : MonoBehaviour
         if (GameData.currentOrder % 10 == 0)
         {
             GameData.countdownSpeed++;
-        }
-    }
-
-    //---------------------------------------------------------------------------------------------------
-
-    /// <summary>
-    /// 判断玩家是否游戏失败，Hp
-    /// </summary>
-    private void JudgeHpGameOver() 
-    { 
-        if(GameData.playerHP <= 0)
-        {
-            //当前游戏状态变为End
-            GameData.gameState = GameState.End;
         }
     }
 
