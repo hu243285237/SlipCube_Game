@@ -25,8 +25,8 @@ public sealed class LoadingNetwork : MonoBehaviour
             //将排名信息显示到UI
             for (int i = 1; i <= GameData.rankList.Count; i++)
             {
-                GameObject nameText = GameObject.Find("Canvas/RankCanvas/Rank" + i + "/NameImage/Text");
-                GameObject scoreText = GameObject.Find("Canvas/RankCanvas/Rank" + i + "/ScoreImage/Text");
+                GameObject nameText = GameObject.Find("MenuCanvas/RankCanvas/Rank" + i + "/NameImage/Text");
+                GameObject scoreText = GameObject.Find("MenuCanvas/RankCanvas/Rank" + i + "/ScoreImage/Text");
                 nameText.GetComponent<Text>().text = GameData.rankList[i - 1].playerName;
                 scoreText.GetComponent<Text>().text = GameData.rankList[i - 1].score.ToString();
             }
