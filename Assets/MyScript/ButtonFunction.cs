@@ -69,6 +69,8 @@ public class ButtonFunction : MonoBehaviour
     /// </summary>
     public void _ConfirmNameButton()
     {
+        CanvasManager.nameInputField.text = CanvasManager.nameInputField.text == "" ? "无名大侠" : CanvasManager.nameInputField.text;
+
         //上传排名信息
         Rank rank = new Rank
         {

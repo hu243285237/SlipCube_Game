@@ -15,6 +15,18 @@ public class GameController : MonoBehaviour
     [Range( 1.0f, 20.0f)]
     public float rotateTime = 14.0f;//旋转的时间
 
+    public SpriteRenderer startArrow;
+
+    public TargetInfo leftTarget;
+    public TargetInfo rightTarget;
+    public TargetInfo upTarget;
+    public TargetInfo downTarget;
+
+    public Sprite leftArrow;
+    public Sprite rightArrow;
+    public Sprite upArrow;
+    public Sprite downArrow;
+
     private RotateState rotateState = RotateState.Start;//旋转的状态
 
     private float deltaRotateCount = 0;//旋转时的增量，累计当前旋转了多少度
@@ -52,17 +64,21 @@ public class GameController : MonoBehaviour
         GameData.countdownSpeed = 1.0f;
         GameData.gameState = GameState.Playing;
 
+        mainCube.SetActive(true);
+
+        mainCube.transform.eulerAngles = Vector3.zero;
+
+        StartRandomArrow();
+
         rotateDirectionList.Clear();
 
         CanvasManager.mainCanvas.SetActive(false);
         CanvasManager.playingCanvas.SetActive(true);
 
-        CanvasManager.scoreText.text = "Score : " + GameData.score;
+        CanvasManager.scoreText.text = "" + GameData.score;
 
         //以防时间条闪一下
         CanvasManager.countdownSlider.value = GameData.countdownTime;
-
-        mainCube.SetActive(true);
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -105,6 +121,8 @@ public class GameController : MonoBehaviour
         CanvasManager.endGameCanvas.SetActive(true);
 
         mainCube.SetActive(false);
+
+        CanvasManager.nameInputField.text = CanvasManager.nameInputField.text == "无名大侠" ? "" : CanvasManager.nameInputField.text;
     }
 
     //---------------------------------------------------------------------------------------------------
@@ -195,6 +213,9 @@ public class GameController : MonoBehaviour
         //旋转的状态变为Update
         rotateState = RotateState.Update;
 
+        //随机生成下一个箭头方向
+        GenerateNext();
+
         GameData.countdownTime = 5.0f;
     }
 
@@ -239,15 +260,83 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void EndRotateCube()
     {
+        rotateState = RotateState.Start;
+
+        if (rotateDirectionList[GameData.currentOrder] == RotateDirection.Left && leftTarget.currentArrow.sprite != leftArrow)
+        {
+            GameData.gameState = GameState.End;
+            return;
+        }
+        if (rotateDirectionList[GameData.currentOrder] == RotateDirection.Right && rightTarget.currentArrow.sprite != rightArrow)
+        {
+            GameData.gameState = GameState.End;
+            return;
+        }
+        if (rotateDirectionList[GameData.currentOrder] == RotateDirection.Up && upTarget.currentArrow.sprite != upArrow)
+        {
+            GameData.gameState = GameState.End;
+            return;
+        }
+        if (rotateDirectionList[GameData.currentOrder] == RotateDirection.Down && downTarget.currentArrow.sprite != downArrow)
+        {
+            GameData.gameState = GameState.End;
+            return;
+        }
+
         GameData.score++;//分数+1
         GameData.currentOrder++;//滑动次数+1
 
-        if (GameData.currentOrder % 10 == 0) GameData.countdownSpeed++; ;//逐渐增加倒计时的速度
+        if (GameData.currentOrder % 10 == 0) GameData.countdownSpeed++;//逐渐增加倒计时的速度
 
-        CanvasManager.scoreText.text = "Score : " + GameData.score;
-
-        rotateState = RotateState.Start;
+        CanvasManager.scoreText.text = "" + GameData.score;
     }
 
     //---------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 随机生成下一箭头方向
+    /// </summary>
+    private void GenerateNext()
+    {
+        leftTarget.currentArrow.gameObject.transform.eulerAngles = new Vector3(0, 90, 0);
+        rightTarget.currentArrow.gameObject.transform.eulerAngles = new Vector3(0, -90, 0);
+        upTarget.currentArrow.gameObject.transform.eulerAngles = new Vector3(90, 0, 0);
+        downTarget.currentArrow.gameObject.transform.eulerAngles = new Vector3(-90, 0, 0);
+
+        Sprite randowArrow = null;
+
+        switch (Random.Range(0, 4))
+        {
+            case 0: randowArrow = leftArrow; break;
+            case 1: randowArrow = rightArrow; break;
+            case 2: randowArrow = upArrow; break;
+            case 3: randowArrow = leftArrow; break;
+        }
+
+        switch (rotateDirectionList[GameData.currentOrder])
+        {
+            case RotateDirection.Left: rightTarget.currentArrow.sprite = randowArrow; break;
+            case RotateDirection.Right: leftTarget.currentArrow.sprite = randowArrow; break;
+            case RotateDirection.Down: upTarget.currentArrow.sprite = randowArrow; break;
+            case RotateDirection.Up: downTarget.currentArrow.sprite = randowArrow; break;
+        }
+    }
+
+    //---------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 开始时随机生成箭头方向
+    /// </summary>
+    private void StartRandomArrow() 
+    {
+        switch (Random.Range(0, 4))
+        {
+            case 0: startArrow.sprite = leftArrow; break;
+            case 1: startArrow.sprite = rightArrow; break;
+            case 2: startArrow.sprite = upArrow; break;
+            case 3: startArrow.sprite = leftArrow; break;
+        }
+
+        startArrow.gameObject.transform.eulerAngles = Vector3.zero;
+    }
 }
