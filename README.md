@@ -12,3 +12,5 @@ Cache data is use bmob server
 Only support android system now
 
 Maybe will happen resolution problem in different device
+
+![ScreenShot](SlipCube_Game/Screenshot.png)
