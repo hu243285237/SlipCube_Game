@@ -13,4 +13,4 @@ Only support android system now
 
 Maybe will happen resolution problem in different device
 
-![ScreenShot](https://github.com/hu243285237/SlipCube_Game/Screenshot.png)
+![ScreenShot](https://github.com/hu243285237/SlipCube_Game/blob/master/Screenshot.png)
