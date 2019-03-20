@@ -310,7 +310,7 @@ public class GameController : MonoBehaviour
             case 0: randowArrow = leftArrow; break;
             case 1: randowArrow = rightArrow; break;
             case 2: randowArrow = upArrow; break;
-            case 3: randowArrow = leftArrow; break;
+            case 3: randowArrow = downArrow; break;
         }
 
         switch (rotateDirectionList[GameData.currentOrder])
